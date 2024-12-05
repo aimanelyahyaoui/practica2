@@ -104,3 +104,14 @@ class Districte:
    
     def densitat (self):
         return (self.poblacio/self.extensio)  
+
+#Ex 8:
+
+def omplir_llista_barris (districtes, barris):
+    if any(districte.llista_barris for districte in districtes.values()):
+        print("El diccionari de districtes ja conté informació dels barris")
+    
+    else: 
+        for codi_districte, districte in districtes.items ():
+            noms_barris = [barri.nom for barri in barris.values() if barri.codi_districte == codi_districte]
+            districte.llista_barris = noms_barris
