@@ -57,3 +57,50 @@ class Hotel:
         distancia = RADI_TERRA * c
 
         return distancia
+#ex 2:
+def codi_in_llista_hotels (llista_hotels, codi_hotels):
+    if codi_hotels in llista_hotels:
+        return True
+    else: 
+        return False
+
+#Ex 4:
+    
+class Barri ():
+    def __init__(self, nom, codi_districte):
+        
+        if not isinstance(codi_districte, int) or codi_districte<=0:
+            raise TypeError("codi_districte ha de ser un valor enter positiu")
+        else:
+            self.nom = nom
+            self.codi_districte = codi_districte
+            
+           
+    
+    def __str__ (self):
+        return (self.nom+"(districte:"+str(self.codi_districte)+str(")"))
+
+#Ex 6:
+
+class Districte:
+    def __init__ (self, nom, extensio, poblacio):
+        if not isinstance(poblacio, int) or poblacio<=0:
+            raise TypeError("població ha de ser un valor enter positiu")
+        if not isinstance(extensio, float) or extensio<=0:
+            raise TypeError("extensio ha de ser un valor enter positiu")
+        
+        else:
+            self.nom = nom
+            self.extensio = extensio
+            self.poblacio = poblacio
+            self.llista_barris = []
+            
+        
+    def __str__ (self):
+        if self.llista_barris == []:
+            return (self.nom+"("+str(self.extensio)+"kms2,"+str(self.habitants)+"habitants)"+" "+"barris: N/D") 
+        else:
+            return (self.nom+"("+str(self.extensio)+"kms2,"+str(self.habitants)+"habitants)"+" "+"barris: "+str(self.llista_barris)) 
+   
+    def densitat (self):
+        return (self.poblacio/self.extensio)  
