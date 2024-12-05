@@ -63,6 +63,31 @@ def codi_in_llista_hotels (llista_hotels, codi_hotels):
         return True
     else: 
         return False
+#Ex 3:
+def importar_hotels(nom_fitxer, separador: str = ";"):
+    llista_hotels = []
+    try:
+        with open(nom_fitxer, 'r', encoding='utf-8') as fitxer:
+            linies = fitxer.readlines()
+
+            for linia in linies[1:]:
+                linia = linia.strip()
+                dades = linia.split(separador)
+
+                codi, nom = dades[0].split(' - ')
+                habitacions = int(dades[1])
+                preu = float(dades[2])
+                latitud = float(dades[3]) / 1e6
+                longitud = float(dades[4]) / 1e6
+
+                if not codi_in_llista_hotels(llista_hotels, codi_hotels):
+                    hotel = Hotel(codi, nom, habitacions, preu, latitud, longitud)
+                    llista_hotels.append(hotel)
+            print(f"S'han importat correctament {len(llista_hotels)} hotels")
+            return llista_hotels
+
+    except FileNotFoundError:
+        raise FileNotFoundError("fitxer no trobat")
 
 #Ex 4:
     
