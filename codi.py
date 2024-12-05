@@ -104,6 +104,26 @@ class Barri ():
     
     def __str__ (self):
         return (self.nom+"(districte:"+str(self.codi_districte)+str(")"))
+        
+#Ex 5:
+def importar_barris(nom_fitxer, separador = ';'):
+    diccionari_barris = {}
+
+    try:
+        with open(nom_fitxer, 'r', encoding='utf-8') as fitxer:
+            for linia in fitxer.readlines()[1:]:
+                dades = linia.strip().split(separador)
+                codi = int(dades[0])
+                nom = dades[1]
+                poblacio = int(dades[2])
+                area = float(dades[3])
+
+                diccionari_barris[codi] = Barri(codi, nom, poblacio, area)
+            print(f"S'han importat correctament {len(diccionari_barris)} barris")
+            return diccionari_barris
+    except FileNotFoundError:
+        raise FileNotFoundError("Fitxer no trobat")
+        
 
 #Ex 6:
 
