@@ -115,3 +115,7 @@ def omplir_llista_barris (districtes, barris):
         for codi_districte, districte in districtes.items ():
             noms_barris = [barri.nom for barri in barris.values() if barri.codi_districte == codi_districte]
             districte.llista_barris = noms_barris
+#Ex 10:
+
+def mostrar_menu ():
+    print("\n--- MENÚ PRINCIPAL ---\n1 - Veure hotels\nS - Sortir del programa")
