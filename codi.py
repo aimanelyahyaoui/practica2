@@ -149,7 +149,27 @@ class Districte:
    
     def densitat (self):
         return (self.poblacio/self.extensio)  
+#Ex 7:
+def importar_districtes(nom_fitxer, separador = ';'):
+    diccionari_districtes = {}
 
+    try:
+        with open(nom_fitxer, 'r', encoding='utf-8') as fitxer:
+            for linia in fitxer.readlines()[1:]:
+                dades = linia.strip().split(separador)
+                codi = int(dades[0])
+                nom = dades[1]
+                poblacio = int(dades[2])
+                area = float(dades[3])
+
+                diccionari_districtes[codi] = Districte(codi, nom ,poblacio, area)
+
+        print(f"S'han importat correctament {len(diccionari_districtes)} districtes")
+        return diccionari_districtes
+    
+    except FileNotFoundError:
+        raise FileNotFoundError("Fitxer no trobat")
+        
 #Ex 8:
 
 def omplir_llista_barris (districtes, barris):
