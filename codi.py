@@ -196,4 +196,8 @@ def mostrar_menu ():
 #Ex 11:
 
 #PART 2:
-
+#Ex 1:
+def ordenar_per_estrelles(hotels):
+    hotels_copia = hotels[:]
+    hotels_copia.sort(key=lambda hotel: hotels.estrelles)
+    return hotels_copia
