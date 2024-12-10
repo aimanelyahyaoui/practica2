@@ -192,3 +192,8 @@ def mostrar_hotels(llista_hotels):
 
 def mostrar_menu ():
     print("\n--- MENÚ PRINCIPAL ---\n1 - Veure hotels\nS - Sortir del programa")
+
+#Ex 11:
+
+#PART 2:
+
