@@ -201,3 +201,29 @@ def ordenar_per_estrelles(hotels):
     hotels_copia = hotels[:]
     hotels_copia.sort(key=lambda hotel: hotels.estrelles)
     return hotels_copia
+
+#Ex 3:
+def buscar_per_nom(hotels, nom_buscar):
+    nom_buscar = nom_buscar.lower()
+    hotels_trobats = []
+    for hotel in hotels:
+        if nom_buscar in hotel.nom.lower():
+            hotels_trobats.append(hotel)
+    return hotels_trobats
+
+#Ex 5:
+def buscar_hotels(hotels):
+    criteri = input("Introdueix criteri de cerca (1 - per nom, 2 - per estrelles): ")
+
+    if criteri == '1':
+        nom_buscar = input("Introdueix el nom de l'hotel a buscar: ")
+        hotels_trobats = buscar_per_nom(hotels_trobats)
+
+        if hotels_trobats:
+            print(f"S'han trobat {len(hotels_trobats)} hotels.")
+        else:
+            print("No s'han trobat hotels.")
+    elif criteri == 2:
+        print("La cerca per estrelles encara no està implementada.")
+    else:
+        print("Criteri invàlid. Torna-ho a intentar.")
