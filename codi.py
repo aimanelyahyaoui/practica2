@@ -1,4 +1,5 @@
 import math
+
 class Hotel:
     def __init__(self, nom, codi_hotel, carrer, numero, codi_barri, codi_postal, telefon, latitud, longitud, estrelles):
         if not isinstance(numero, int) or numero <= 0:
@@ -57,8 +58,8 @@ class Hotel:
 
         return distancia
 #ex 2:
-def codi_in_llista_hotels (llista_hotels, codi_hotels):
-    if codi_hotels in llista_hotels:
+def codi_in_llista_hotels (llista_hotels, codi_hotel):
+    if codi_hotel in llista_hotels:
         return True
     else: 
         return False
@@ -79,7 +80,7 @@ def importar_hotels(nom_fitxer, separador: str = ";"):
                 latitud = float(dades[3]) / 1e6
                 longitud = float(dades[4]) / 1e6
 
-                if not codi_in_llista_hotels(llista_hotels, codi_hotels):
+                if not codi_in_llista_hotels(llista_hotels, codi_hotel):
                     hotel = Hotel(codi, nom, habitacions, preu, latitud, longitud)
                     llista_hotels.append(hotel)
             print(f"S'han importat correctament {len(llista_hotels)} hotels")
@@ -193,6 +194,36 @@ def mostrar_menu ():
     print("\n--- MENÚ PRINCIPAL ---\n1 - Veure hotels\nS - Sortir del programa")
 
 #Ex 11:
+    
+def main ():
+    llista_hotels = []
+    diccionari_barris = {}
+    diccionari_districtes = {}
+    opcio = 1
+    try:
+        diccionari_barris = importar_barris("hotels.csv")
+        diccionari_districtes = importar_districtes("districtes.csv")
+        llista_hotels = importar_hotels("hotels.csv")
+    except FileNotFoundError:
+        raise ("Error llegint fitxers: ")
+    except:
+        raise ("Error processant els fitxers: ")
+    
+    else: 
+        omplir_llista_barris(diccionari_districtes, diccionari_barris)
+        
+        while opcio != "S" or opcio!= "s":
+            mostrar_menu()
+            opcio = input("Introdueix una opcio: ")
+            if opcio == 1:
+                mostrar_hotels (llista_hotels)
+            if opcio == "s" or opcio == "S":
+                print("Sortint del programa")
+            else: 
+                print("Opció no permesa")
+    finally:
+        raise ("© Aiman El Yayhoui Lazzar & Roger Campos Guilera")
+        
 
 #PART 2:
 #Ex 1:
