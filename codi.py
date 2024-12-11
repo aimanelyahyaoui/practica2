@@ -1,5 +1,4 @@
 import math
-
 class Hotel:
     def __init__(self, nom, codi_hotel, carrer, numero, codi_barri, codi_postal, telefon, latitud, longitud, estrelles):
         if not isinstance(numero, int) or numero <= 0:
