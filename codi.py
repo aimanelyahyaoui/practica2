@@ -232,6 +232,12 @@ def ordenar_per_estrelles(hotels):
     hotels_copia.sort(key=lambda hotel: hotels.estrelles)
     return hotels_copia
 
+#Ex 2:
+
+def mostrar_noms_hotels (llista_hotels):
+    for hotel in llista_hotels:
+        print (hotel.nom, "("+hotel.codi+")")
+
 #Ex 3:
 def buscar_per_nom(hotels, nom_buscar):
     nom_buscar = nom_buscar.lower()
@@ -241,6 +247,14 @@ def buscar_per_nom(hotels, nom_buscar):
             hotels_trobats.append(hotel)
     return hotels_trobats
 
+#Ex 4:
+
+def buscar_hotels_per_estrelles (llista_hotels, estrelles):
+    sortida = []
+    for hotel in llista_hotels:
+        if hotel.estrelles >= estrelles:
+            sortida.append(hotel)
+    return sortida
 #Ex 5:
 def buscar_hotels(hotels):
     criteri = input("Introdueix criteri de cerca (1 - per nom, 2 - per estrelles): ")
@@ -257,3 +271,20 @@ def buscar_hotels(hotels):
         print("La cerca per estrelles encara no està implementada.")
     else:
         print("Criteri invàlid. Torna-ho a intentar.")
+        
+
+#Ex 6:
+    
+def hotel_mes_proper (llista_hotels, latitud, longitud):
+    if not llista_hotels:
+        return None, None
+    else: 
+        hotel_proper = llista_hotels[0]
+        dist_hotel_proper = llista_hotels[0].distancia (latitud, longitud)
+        for hotel in llista_hotels:
+            if hotel.distancia (latitud, longitud) <dist_hotel_proper:
+                hotel_proper = hotel
+                dist_hotel_proper = hotel.distacia (latitud, longitud)
+    
+        return hotel_proper, dist_hotel_proper
+    
