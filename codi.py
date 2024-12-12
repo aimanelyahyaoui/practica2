@@ -356,3 +356,23 @@ def main ():
                 print("Opció no permesa")
     finally:
         raise ("© Aiman El Yahyaoui Lazaar & Roger Campos Guilera")
+
+#PART 3
+
+#Ex 1:
+    
+def ordenar_per_nom (llista_hotels):
+    return sorted(llista_hotels, key=lambda hotel: hotel.nom)   
+#Ex 3:
+    
+def estrelles_per_barri (llista_hotels, diccionari_barris):
+    dic = {}
+    for codi_barri, diccionari_barris in diccionari_barris.items:
+        dic [diccionari_barris.nom] = [0]*5
+        
+    for hotel in llista_hotels:
+        barri = diccionari_barris[hotel.barri]
+        estrelles = hotel.estrelles
+        dic [barri] [estrelles -1] += 1
+    
+    return dic
