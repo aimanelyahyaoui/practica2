@@ -417,3 +417,27 @@ def densitat_per_districte(llista_hotels, dic_barris, dic_districtes):
 def afegir_prefixe_int (hotel):
     if hotel.numero [0] != "+":
         hotel.numero = "+34"+hotel.numero
+
+#Ex 7:
+    
+def estrelles_per_districte (llista_hotels, barris, districtes):
+    resultat  = {}
+    for districtes in districtes.items():
+        resultat [districtes.nom] = [0]*5
+    for hotel in llista_hotels:
+        estrelles = hotel.estrelles
+        barri = barris[hotel.barri] 
+        districte = districtes [barri.districte]
+        resultat [districte] [estrelles -1] +=1
+    return resultat
+
+#Ex 9:
+    
+def mostrar_menu ():
+    print()
+    print("--- MENÚ PRINICIPAL ---")
+    print("1 - Veure hotels")
+    print("2 - Veure hotels per estrelles")
+    print("3 - Buscar hotels")
+    print("4 - Buscar hotel proper")
+    print("\n5 - Llistat alfabètic d'hotels \n6 - Carrers amb hotels \n7 - Estadística de barris \n8 - Estadística per districtes \n9 - Internacionalitzar telèfons\nS - Sortir del programa")
