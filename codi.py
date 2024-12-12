@@ -363,6 +363,7 @@ def main ():
     
 def ordenar_per_nom (llista_hotels):
     return sorted(llista_hotels, key=lambda hotel: hotel.nom)   
+
 #Ex 3:
     
 def estrelles_per_barri (llista_hotels, diccionari_barris):
@@ -376,3 +377,9 @@ def estrelles_per_barri (llista_hotels, diccionari_barris):
         dic [barri] [estrelles -1] += 1
     
     return dic
+
+#Ex 5:
+    
+def afegir_prefixe_int (hotel):
+    if hotel.numero [0] != "+":
+        hotel.numero = "+34"+hotel.numero
