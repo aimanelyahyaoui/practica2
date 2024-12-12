@@ -260,17 +260,33 @@ def buscar_hotels(hotels):
     criteri = input("Introdueix criteri de cerca (1 - per nom, 2 - per estrelles): ")
 
     if criteri == '1':
-        nom_buscar = input("Introdueix el nom de l'hotel a buscar: ")
-        hotels_trobats = buscar_per_nom(hotels_trobats)
-
+        nom_buscar = input("Introdueix el nom de l'hotel a buscar: ").strip()
+        hotels_trobats = buscar_per_nom(hotels, nom_buscar)
         if hotels_trobats:
-            print(f"S'han trobat {len(hotels_trobats)} hotels.")
+            print(f"S'han trobat {len(hotels_trobats)} hotels amb aquest nom: ")
+            mostrar_noms_hotels(hotels_trobats)
         else:
             print("No s'han trobat hotels.")
-    elif criteri == 2:
-        print("La cerca per estrelles encara no està implementada.")
+    elif criteri == '2':
+        while True:
+            try:
+                estrelles = int(input("Introdueix el número d'estrelles a buscar: "))
+                if 1 <= estrelles <= 5:
+                    break
+                else:
+                    print("Error: el número d'estrelles ha de ser un valor enter.")
+            except ValueError:
+                print("Error: el número d'estrelles ha de ser un valor entre 1 i 5.")
+        
+        hotels_trobats = buscar_per_estrelles(hotels, estrelles)
+
+        if hotels_trobats:
+            print(f"S'han trobat {len(hotels_trobats)} hotels de {estrelles} estrelles: ")
+            mostrar_noms_hotels(hotels_trobats)
+        else:
+            print("No s'han trobat hotels.")
     else:
-        print("Criteri invàlid. Torna-ho a intentar.")
+        print("Error: criteri de cerca no vàlid.")
         
 
 #Ex 6:
