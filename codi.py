@@ -222,7 +222,7 @@ def main ():
             else: 
                 print("Opció no permesa")
     finally:
-        raise ("© Aiman El Yayhoui Lazzar & Roger Campos Guilera")
+        raise ("© Aiman El Yayhoui Lazaar & Roger Campos Guilera")
         
 
 #PART 2:
