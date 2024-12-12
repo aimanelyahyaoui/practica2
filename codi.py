@@ -303,4 +303,14 @@ def hotel_mes_proper (llista_hotels, latitud, longitud):
                 dist_hotel_proper = hotel.distacia (latitud, longitud)
     
         return hotel_proper, dist_hotel_proper
+
+#Ex 7:
+def mostrar_menu():
+    print()
+    print("--- MENÚ PRINICIPAL ---")
+    print("1 - Veure hotels")
+    print("2 - Veure hotels per estrelles")
+    print("3 - Buscar hotels")
+    print("4 - Buscar hotel proper")
+    print("S - Sortir del programa")
     
