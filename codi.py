@@ -364,6 +364,14 @@ def main ():
 def ordenar_per_nom (llista_hotels):
     return sorted(llista_hotels, key=lambda hotel: hotel.nom)   
 
+#Ex 2:
+def carrers_amb_hotels(llista_hotels):
+    carrers = set()
+    for hotel in llista_hotels:
+        carrers.add(hotel.carrer)
+    return list(carrers)
+
+
 #Ex 3:
     
 def estrelles_per_barri (llista_hotels, diccionari_barris):
@@ -377,6 +385,32 @@ def estrelles_per_barri (llista_hotels, diccionari_barris):
         dic [barri] [estrelles -1] += 1
     
     return dic
+
+#Ex 4:
+def densitat_per_districte(llista_hotels, dic_barris, dic_districtes):
+    comptadors = {}
+
+    for hotel in llista_hotels:
+        codi_barri = hotel.codi_barri
+
+        if codi_barri in dic_barris:
+            codi_districte = dic_barris[codi_barri].codi_districte
+
+            if codi_districte not in comptadors:
+                comptadors[codi_districte] = 0
+            comptadors[codi_districte] += 1
+
+    densitats = {}
+    for codi_districte, num_hotels in comptadors.items():
+        if codi_districte in dic_districtes:
+            area = dic_districtes[codi_districte].area
+            if area > 0:
+                densitats[codi_districte] = num_hotels / area
+            else:
+                densitats[codi_districte] = 0
+
+    return densitats
+
 
 #Ex 5:
     
