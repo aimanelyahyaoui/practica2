@@ -58,11 +58,11 @@ class Hotel:
 
         return distancia
 #ex 2:
-def codi_in_llista_hotels (llista_hotels, codi_hotel):
-    if codi_hotel in llista_hotels:
-        return True
-    else: 
-        return False
+def codi_in_llista_hotels(llista_hotels, codi_hotel):
+    for hotel in llista_hotels:
+        if hotel.codi_hotel == codi_hotel:
+            return True
+    return False
 #Ex 3:
 def importar_hotels(nom_fitxer, separador: str = ";"):
     llista_hotels = []
@@ -301,7 +301,7 @@ def hotel_mes_proper (llista_hotels, latitud, longitud):
         for hotel in llista_hotels:
             if hotel.distancia (latitud, longitud) <dist_hotel_proper:
                 hotel_proper = hotel
-                dist_hotel_proper = hotel.distacia (latitud, longitud)
+                dist_hotel_proper = hotel.distancia (latitud, longitud)
     
         return hotel_proper, dist_hotel_proper
 
