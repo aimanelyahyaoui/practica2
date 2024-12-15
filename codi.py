@@ -189,7 +189,7 @@ def mostrar_hotels(llista_hotels):
             print(f"Codi: {hotel.codi}, Nom: {hotel.nom}, Habitacions: {hotel.habitacions}, Preu: {hotel.preu}, Latitud: {hotel.latitud}, Longitud: {hotel.longitud}")
             
 #Ex 10:
-"""
+
 def mostrar_menu ():
     print("\n--- MENÚ PRINCIPAL ---\n1 - Veure hotels\nS - Sortir del programa")
 
@@ -224,7 +224,6 @@ def main ():
     finally:
         raise ("© Aiman El Yahyaoui Lazaar & Roger Campos Guilera")
         
-"""
 #PART 2:
 #Ex 1:
 
