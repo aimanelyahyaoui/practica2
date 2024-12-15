@@ -306,7 +306,6 @@ def hotel_mes_proper (llista_hotels, latitud, longitud):
         return hotel_proper, dist_hotel_proper
 
 #Ex 7:
-"""
 def mostrar_menu():
     print()
     print("--- MENÚ PRINICIPAL ---")
@@ -357,7 +356,7 @@ def main ():
                 print("Opció no permesa")
     finally:
         raise ("© Aiman El Yahyaoui Lazaar & Roger Campos Guilera")
-"""
+
 #PART 3
 
 #Ex 1:
