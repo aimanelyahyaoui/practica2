@@ -9,7 +9,7 @@ class Hotel:
             raise TypeError("codi_barri ha de ser un valor enter positiu")
         
         if not isinstance(estrelles, int) or not (1 <= estrelles <= 5):
-            raise TypeError("estrelles ha de ser un valor enter positiu")
+            raise ValiueError("estrelles ha de ser un valor entre 1 i 5")
         
         if not isinstance(latitud, float):
             raise TypeError("latitud ha de ser un valor real")
@@ -103,7 +103,7 @@ class Barri ():
            
     
     def __str__ (self):
-        return (self.nom+"(districte:"+str(self.codi_districte)+str(")"))
+        return (self.nom+" (districte: "+str(self.codi_districte)+str(")"))
         
 #Ex 5:
 def importar_barris(nom_fitxer, separador = ';'):
