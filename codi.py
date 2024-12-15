@@ -9,7 +9,7 @@ class Hotel:
             raise TypeError("codi_barri ha de ser un valor enter positiu")
         
         if not isinstance(estrelles, int) or not (1 <= estrelles <= 5):
-            raise ValiueError("estrelles ha de ser un valor entre 1 i 5")
+            raise ValueError("estrelles ha de ser un valor entre 1 i 5")
         
         if not isinstance(latitud, float):
             raise TypeError("latitud ha de ser un valor real")
@@ -128,27 +128,27 @@ def importar_barris(nom_fitxer, separador = ';'):
 #Ex 6:
 
 class Districte:
-    def __init__ (self, nom, extensio, poblacio):
-        if not isinstance(poblacio, int) or poblacio<=0:
-            raise TypeError("població ha de ser un valor enter positiu")
-        if not isinstance(extensio, float) or extensio<=0:
-            raise TypeError("extensio ha de ser un valor enter positiu")
+    def __init__(self, nom, extensio, poblacio):
+        if not isinstance(poblacio, int) or poblacio <= 0:
+            raise TypeError("poblacio ha de ser un valor enter positiu")
         
-        else:
-            self.nom = nom
-            self.extensio = extensio
-            self.poblacio = poblacio
-            self.llista_barris = []
-            
+        if not isinstance(extensio, float) or extensio <= 0:
+            raise TypeError("extensio ha de ser un valor real positiu")
         
-    def __str__ (self):
-        if self.llista_barris == []:
-            return (self.nom+"("+str(self.extensio)+"kms2,"+str(self.habitants)+"habitants)"+" "+"barris: N/D") 
+        self.nom = nom
+        self.extensio = extensio
+        self.poblacio = poblacio
+        self.llista_barris = [] 
+
+    def __str__(self):
+        if not self.llista_barris:
+            barris_str = "N/D"
         else:
-            return (self.nom+"("+str(self.extensio)+"kms2,"+str(self.habitants)+"habitants)"+" "+"barris: "+str(self.llista_barris)) 
-   
-    def densitat (self):
-        return (self.poblacio/self.extensio)  
+            barris_str = ", ".join(self.llista_barris)
+        return f"{self.nom} ({self.extensio} kms2, {self.poblacio} habitants) barris: {barris_str}"
+
+    def densitat(self):
+        return self.poblacio / self.extensio 
 #Ex 7:
 def importar_districtes(nom_fitxer, separador = ';'):
     diccionari_districtes = {}
