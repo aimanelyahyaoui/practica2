@@ -190,42 +190,7 @@ def mostrar_hotels(llista_hotels):
         for hotel in llista_hotels:
             print(f"Codi: {hotel.codi}, Nom: {hotel.nom}, Habitacions: {hotel.habitacions}, Preu: {hotel.preu}, Latitud: {hotel.latitud}, Longitud: {hotel.longitud}")
             
-#Ex 10:
 
-def mostrar_menu ():
-    print("\n--- MENÚ PRINCIPAL ---\n1 - Veure hotels\nS - Sortir del programa")
-
-#Ex 11:
-    
-def main ():
-    llista_hotels = []
-    diccionari_barris = {}
-    diccionari_districtes = {}
-    opcio = 1
-    try:
-        diccionari_barris = importar_barris("hotels.csv")
-        diccionari_districtes = importar_districtes("districtes.csv")
-        llista_hotels = importar_hotels("hotels.csv")
-    except FileNotFoundError:
-        raise ("Error llegint fitxers: ")
-    except:
-        raise ("Error processant els fitxers: ")
-    
-    else: 
-        omplir_llista_barris(diccionari_districtes, diccionari_barris)
-        
-        while opcio != "S" or opcio!= "s":
-            mostrar_menu()
-            opcio = input("Introdueix una opcio: ")
-            if opcio == 1:
-                mostrar_hotels (llista_hotels)
-            if opcio == "s" or opcio == "S":
-                print("Sortint del programa")
-            else: 
-                print("Opció no permesa")
-    finally:
-        raise ("© Aiman El Yahyaoui Lazaar & Roger Campos Guilera")
-        
 #PART 2:
 #Ex 1:
 
@@ -306,57 +271,7 @@ def hotel_mes_proper (llista_hotels, latitud, longitud):
     
         return hotel_proper, dist_hotel_proper
 
-#Ex 7:
-def mostrar_menu():
-    print()
-    print("--- MENÚ PRINICIPAL ---")
-    print("1 - Veure hotels")
-    print("2 - Veure hotels per estrelles")
-    print("3 - Buscar hotels")
-    print("4 - Buscar hotel proper")
-    print("S - Sortir del programa")
 
-def main ():
-    llista_hotels = []
-    diccionari_barris = {}
-    diccionari_districtes = {}
-    opcio = 1
-    try:
-        diccionari_barris = importar_barris("hotels.csv")
-        diccionari_districtes = importar_districtes("districtes.csv")
-        llista_hotels = importar_hotels("hotels.csv")
-    except FileNotFoundError:
-        raise ("Error llegint fitxers: ")
-    except:
-        raise ("Error processant els fitxers: ")
-    
-    else: 
-        omplir_llista_barris(diccionari_districtes, diccionari_barris)
-        
-        while opcio != "S" or opcio!= "s":
-            mostrar_menu()
-            opcio = input("Introdueix una opcio: ")
-            if opcio == '1':
-                mostrar_hotels(llista_hotels)
-            elif opcio == '2':
-                ordenar_per_estrelles(llista_hotels)
-                mostrar_hotels(llista_hotels)
-            elif opcio == '3':
-                buscar_hotels(llista_hotels)
-            elif opcio == '4':
-                try:
-                    latitud = float(input("Introdueix el valor de la latitud: "))
-                    longitud = float(input("Introdueix el valor de la longitud: "))
-                    hotel_mes_proper(latitud, longitud)
-                    print("L'hotel més proper és el {nom_hotel} a {distancia} kms")
-                except ValueError:
-                    print("Error: latitud i longitud han de ser valors reals")
-            elif opcio == "s" or opcio == "S":
-                print("Sortint del programa")
-            else: 
-                print("Opció no permesa")
-    finally:
-        raise ("© Aiman El Yahyaoui Lazaar & Roger Campos Guilera")
 
 #PART 3
 
