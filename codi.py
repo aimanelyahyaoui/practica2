@@ -5,8 +5,10 @@ class Hotel:
         if not isinstance(numero, int) or numero <= 0:
             raise TypeError("numero ha de ser un valor enter positiu")
         
-        if not isinstance(codi_barri, int) or codi_barri <= 0:
-            raise TypeError("codi_barri ha de ser un valor enter positiu")
+        if not isinstance(estrelles, int) or estrelles <= 0:
+            raise TypeError("estrelles ha de ser un valor enter positiu")
+        if estrelles < 1 or estrelles > 5:
+            raise ValueError("estrelles ha de ser un valor entre 1 i 5")
         
         if not isinstance(estrelles, int) or not (1 <= estrelles <= 5):
             raise ValueError("estrelles ha de ser un valor entre 1 i 5")
