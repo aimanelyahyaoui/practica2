@@ -197,13 +197,12 @@ def omplir_llista_barris (districtes, barris):
             districte.llista_barris = noms_barris
 #Ex 9:
 def mostrar_hotels(llista_hotels):
-    if len(llista_hotels) == 0:
+ 
+    if not llista_hotels: 
         print("No hi ha hotels")
     else:
         for hotel in llista_hotels:
-            print(f"Codi: {hotel.codi}, Nom: {hotel.nom}, Habitacions: {hotel.habitacions}, Preu: {hotel.preu}, Latitud: {hotel.latitud}, Longitud: {hotel.longitud}")
-            
-
+            print(hotel)
 #PART 2:
 #Ex 1:
 
