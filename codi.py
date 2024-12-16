@@ -82,15 +82,21 @@ def importar_hotels(nom_fitxer, separador):
                 codi_barri = int(dades[3])
                 codi_postal = dades[4]
                 telefon = dades[5]
-                latitud = float(dades[6]) / 1_000_000 
-                longitud = float(dades[7]) / 1_000_000  
+                latitud = float(dades[6]) / 1_000_000
+                longitud = float(dades[7]) / 1_000_000
                 estrelles = int(dades[8])
 
-                if not codi_in_llista_hotels(hotels, codi_hotel):
+                if not codi_in_llista_hotels(hotels, nom):
                     hotels.append(Hotel(codi_hotel, nom, carrer, numero, codi_barri, codi_postal, telefon, latitud, longitud, estrelles))
 
         print(f"S'han importat correctament {len(hotels)} hotels")
         return hotels
+
+    except FileNotFoundError:
+        raise FileNotFoundError("fitxer no trobat")
+    except Exception as e:
+        raise e
+
 
 #Ex 4:
     
