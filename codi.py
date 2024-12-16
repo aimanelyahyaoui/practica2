@@ -208,14 +208,14 @@ def mostrar_hotels(llista_hotels):
 
 def ordenar_per_estrelles(llista_hotels):
     hotels_copia = llista_hotels[:]
-    hotels_copia.sort(key=lambda hotel: hotels.estrelles)
+    hotels_copia.sort(key=lambda hotel: hotel.estrelles)
     return hotels_copia
 
 #Ex 2:
 
 def mostrar_noms_hotels (llista_hotels):
     for hotel in llista_hotels:
-        print (hotel.nom, "("+hotel.codi+")")
+        print (hotel.nom, "("+hotel.codi_hotel+")")
 
 #Ex 3:
 def buscar_per_nom(llista_hotels, nom_buscar):
@@ -228,12 +228,8 @@ def buscar_per_nom(llista_hotels, nom_buscar):
 
 #Ex 4:
 
-def buscar_hotels_per_estrelles (llista_hotels, estrelles):
-    sortida = []
-    for hotel in llista_hotels:
-        if hotel.estrelles >= estrelles:
-            sortida.append(hotel)
-    return sortida
+def buscar_per_estrelles (llista_hotels, estrelles):
+    return list(filter(lambda hotel: hotel.estrelles == estrelles, llista_hotels))
 #Ex 5:
 def buscar_hotels(llista_hotels):
     criteri = input("Introdueix criteri de cerca (1 - per nom, 2 - per estrelles): ")
@@ -250,14 +246,12 @@ def buscar_hotels(llista_hotels):
         while True:
             try:
                 estrelles = int(input("Introdueix el número d'estrelles a buscar: "))
-                if 1 <= estrelles <= 5:
-                    break
-                else:
+                if not isinstance(estrelles, int)                
                     print("Error: el número d'estrelles ha de ser un valor enter.")
             except ValueError:
                 print("Error: el número d'estrelles ha de ser un valor entre 1 i 5.")
         
-        hotels_trobats = buscar_hotels_per_estrelles(llista_hotels, estrelles)
+        hotels_trobats = buscar_per_estrelles(llista_hotels, estrelles)
 
         if hotels_trobats:
             print(f"S'han trobat {len(hotels_trobats)} hotels de {estrelles} estrelles: ")
