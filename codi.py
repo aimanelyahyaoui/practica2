@@ -1,4 +1,5 @@
 import math
+import csv
 
 class Hotel:
     def __init__(self, nom, codi_hotel, carrer, numero, codi_barri, codi_postal, telefon, latitud, longitud, estrelles):
@@ -58,7 +59,7 @@ class Hotel:
         distancia = RADI_TERRA * c
 
         return distancia
-#ex 2:
+#Ex 2:
 def codi_in_llista_hotels(llista_hotels, codi_hotel):
     for hotel in llista_hotels:
         if hotel.codi_hotel == codi_hotel:
@@ -99,7 +100,6 @@ def importar_hotels(nom_fitxer, separador):
 
 
 #Ex 4:
-    
 class Barri ():
     def __init__(self, nom, codi_districte):
         
@@ -115,27 +115,28 @@ class Barri ():
         return (self.nom+" (districte: "+str(self.codi_districte)+str(")"))
         
 #Ex 5:
-def importar_barris(nom_fitxer, separador = ';'):
-    diccionari_barris = {}
-
+def importar_barris(fitxer, separador):
+    barris = {}
     try:
-        with open(nom_fitxer, 'r', encoding='utf-8') as fitxer:
-            for linia in fitxer.readlines()[1:]:
-                dades = linia.strip().split(separador)
-                codi = int(dades[0])
-                nom = dades[1]
-                poblacio = int(dades[2])
-                area = float(dades[3])
-
-                diccionari_barris[codi] = Barri(codi, nom, poblacio, area)
-            print(f"S'han importat correctament {len(diccionari_barris)} barris")
-            return diccionari_barris
+        with open(fitxer, "r") as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=separador)
+            next(csv_reader)
+            for linia_separada in csv_reader:
+                codi_barri = int(linia_separada[0])
+                codi_districte = int(linia_separada[1])
+                nom = linia_separada[2].strip()
+                barris[codi_barri] = Barri(nom, codi_districte)
+        print(f"S'han importat correctament {len(barris)} barris")
+        return barris
     except FileNotFoundError:
-        raise FileNotFoundError("Fitxer no trobat")
-        
+        print(f"Error: el fitxer {fitxer} no s'ha trobat.")
+        raise
+    except Exception as e:
+        print(f"S'ha produït un error: {e}")
+        raise
+
 
 #Ex 6:
-
 class Districte:
     def __init__(self, nom, extensio, poblacio):
         if not isinstance(poblacio, int) or poblacio <= 0:
@@ -158,6 +159,7 @@ class Districte:
 
     def densitat(self):
         return self.poblacio / self.extensio 
+        
 #Ex 7:
 def importar_districtes(nom_fitxer, separador):
     try:
@@ -186,7 +188,6 @@ def importar_districtes(nom_fitxer, separador):
         raise e
         
 #Ex 8:
-
 def omplir_llista_barris (districtes, barris):
     if any(districte.llista_barris for districte in districtes.values()):
         print("El diccionari de districtes ja conté informació dels barris")
@@ -195,6 +196,7 @@ def omplir_llista_barris (districtes, barris):
         for codi_districte, districte in districtes.items ():
             noms_barris = [barri.nom for barri in barris.values() if barri.codi_districte == codi_districte]
             districte.llista_barris = noms_barris
+            
 #Ex 9:
 def mostrar_hotels(llista_hotels):
  
@@ -203,6 +205,7 @@ def mostrar_hotels(llista_hotels):
     else:
         for hotel in llista_hotels:
             print(hotel)
+            
 #PART 2:
 #Ex 1:
 
