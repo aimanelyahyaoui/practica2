@@ -330,7 +330,7 @@ def densitat_per_districte(llista_hotels, dic_barris, dic_districtes):
     densitats = {}
     for codi_districte, num_hotels in comptadors.items():
         if codi_districte in dic_districtes:
-            area = dic_districtes[codi_districte].area
+            area = dic_districtes[codi_districte].extensio
             if area > 0:
                 densitats[codi_districte] = num_hotels / area
             else:
