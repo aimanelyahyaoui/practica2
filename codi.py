@@ -362,7 +362,7 @@ def estrelles_per_districte (llista_hotels, barris, districtes):
     
 def mostrar_menu ():
     print()
-    print("--- MENÚ PRINICIPAL ---")
+    print("--- MENÚ PRINCIPAL ---")
     print("1 - Veure hotels")
     print("2 - Veure hotels per estrelles")
     print("3 - Buscar hotels")
