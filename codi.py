@@ -342,11 +342,20 @@ def densitat_per_districte(llista_hotels, dic_barris, dic_districtes):
     return densitats
 
 
-#Ex 5:
-    
-def modificar_telefons (hotel):
-    if hotel.telefon [0] != "+":
-        hotel.telefon = "+34"+hotel.telefon
+# Ex 5:
+def afegir_prefixe_int(hotel):
+    telefon = hotel.telefon
+    if (telefon[0] != "+"):
+        telefon = "+34" + str(telefon)
+        hotel.telefon = telefon
+    return hotel
+
+
+# Ex 6:
+def modificar_telefons(llista_hotels):
+    comprovacio_telefons = list(map(afegir_prefixe_int, llista_hotels))
+    return comprovacio_telefons
+
 
 #Ex 7:
     
