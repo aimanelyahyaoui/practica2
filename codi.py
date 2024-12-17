@@ -1,4 +1,4 @@
-eimport math
+import math
 import csv
 
 class Hotel:
