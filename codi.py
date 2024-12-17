@@ -1,5 +1,6 @@
 import math
 import csv
+import re
 
 class Hotel:
     def __init__(self, nom, codi_hotel, carrer, numero, codi_barri, codi_postal, telefon, latitud, longitud, estrelles):
@@ -66,37 +67,38 @@ def codi_in_llista_hotels(llista_hotels, codi_hotel):
             return True
     return False
 #Ex 3:
-def importar_hotels(nom_fitxer, separador):
-    hotels = []
+def importar_hotels(fitxer, separador):
+    llista_hotels = []
     try:
-        with open(nom_fitxer, 'r', encoding='utf-8') as fitxer:
-            linies = fitxer.readlines()
-            
-            for linia in linies[1:]:
-                linia = linia.strip()  # Eliminar salts de línia
-                dades = linia.split(separador)
+        csv_file = open(fitxer, 'r', encoding='utf-8')
+        next(csv_file)  # Salta la primera línia
+        for line in csv_file:
+            line = line.strip()  #Eliminar salts de línia
+            elements = line.split(separador)  #Dividir els camps segons el separador
 
-                codi_hotel, nom = dades[0].split(' - ')
+            codi_i_nom = elements[0]
+            match = re.match(r'(.+) - ([A-Z]{2}-[0-9]{6})', codi_i_nom)
+            if not match:
+                continue
+            codi_hotel = match.group(2)
+            nom = match.group(1)
 
-                carrer = dades[1]
-                numero = int(dades[2])
-                codi_barri = int(dades[3])
-                codi_postal = dades[4]
-                telefon = dades[5]
-                latitud = float(dades[6]) / 1_000_000
-                longitud = float(dades[7]) / 1_000_000
-                estrelles = int(dades[8])
-
-                if not codi_in_llista_hotels(hotels, nom):
-                    hotels.append(Hotel(codi_hotel, nom, carrer, numero, codi_barri, codi_postal, telefon, latitud, longitud, estrelles))
-
-        print(f"S'han importat correctament {len(hotels)} hotels")
-        return hotels
-
+            carrer = elements[1]
+            numero = int(elements[2])
+            codi_barri = int(elements[3])
+            codi_postal = elements[4]
+            telefon = elements[5]
+            latitud = int(elements[6]) / 1000000
+            longitud = int(elements[7]) / 1000000
+            estrelles = int(elements[8])
+            if not codi_in_llista_hotels(llista_hotels, codi_hotel):
+                hotel = Hotel(nom, codi_hotel, carrer, numero, codi_barri, codi_postal, telefon, latitud, longitud, estrelles)
+                llista_hotels.append(hotel)
     except FileNotFoundError:
         raise FileNotFoundError("fitxer no trobat")
-    except Exception as e:
-        raise e
+
+    print("S'han importat correctament", (len(llista_hotels)), "hotels")
+    return llista_hotels
 
 
 #Ex 4:
