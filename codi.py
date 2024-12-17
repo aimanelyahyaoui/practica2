@@ -4,7 +4,7 @@ import re
 
 class Hotel:
     def __init__(self, nom, codi_hotel, carrer, numero, codi_barri, codi_postal, telefon, latitud, longitud, estrelles):
-        if not isinstance(numero, int) or numero <= 0:
+        if not isinstance(numero, int) and numero <= 0:
             raise TypeError("numero ha de ser un valor enter positiu")
 
         if not isinstance(codi_barri, int) or codi_barri <= 0:
@@ -344,9 +344,9 @@ def densitat_per_districte(llista_hotels, dic_barris, dic_districtes):
 
 #Ex 5:
     
-def afegir_prefixe_int (hotel):
-    if hotel.numero [0] != "+":
-        hotel.numero = "+34"+hotel.numero
+def modificar_telefons (hotel):
+    if hotel.telefon [0] != "+":
+        hotel.telefon = "+34"+hotel.telefon
 
 #Ex 7:
     
@@ -372,66 +372,71 @@ def mostrar_menu ():
     print("4 - Buscar hotel proper")
     print("\n5 - Llistat alfabètic d'hotels \n6 - Carrers amb hotels \n7 - Estadística de barris \n8 - Estadística per districtes \n9 - Internacionalitzar telèfons\nS - Sortir del programa")
     
-def main ():
-        llista_hotels = []
-        diccionari_barris = {}
-        diccionari_districtes = {}
-        opcio = 1
-        try:
-            diccionari_barris = importar_barris("hotels.csv")
-            diccionari_districtes = importar_districtes("districtes.csv")
-            llista_hotels = importar_hotels("hotels.csv")
-        except FileNotFoundError:
-            raise ("Error llegint fitxers: ")
-        except:
-            raise ("Error processant els fitxers: ")
-        
-        else: 
-            omplir_llista_barris(diccionari_districtes, diccionari_barris)
-            
-            while opcio.upper() != "S":
-                mostrar_menu()
-                opcio = input("Introdueix una opcio: ")
-                if opcio == '1':
-                    mostrar_hotels(llista_hotels)
-                elif opcio == '2':
-                    ordenar_per_estrelles(llista_hotels)
-                    mostrar_hotels(llista_hotels)
-                elif opcio == '3':
-                    buscar_hotels(llista_hotels)
-                elif opcio == '4':
-                    try:
-                        latitud = float(input("Introdueix el valor de la latitud: "))
-                        longitud = float(input("Introdueix el valor de la longitud: "))
-                        hotel_mes_proper(latitud, longitud)
-                        print("L'hotel més proper és el {nom_hotel} a {distancia} kms")
-                    except ValueError:
-                        print("Error: latitud i longitud han de ser valors reals")
-                elif opcio == "5":
-                    ordenar_per_nom(llista_hotels)
-                    mostrar_hotels(llista_hotels)
-                
-                elif opcio == "6":
-                    no_carrers_amb_hotels = carrers_amb_hotels(llista_hotels)
-                    print("Hi ha", len(no_carrers_amb_hotels), "carrers amb algun hotel:", no_carrers_amb_hotels)
-                elif opcio == "7":
-                    dic_estrelles_x_barri = estrelles_per_barri(llista_hotels, diccionari_barris)
-                    for codi_barri, diccionari_barris in diccionari_barris.items:   
-                        for i in range (5):
-                            print(diccionari_barris.nom, dic_estrelles_x_barri[diccionari_barris.nom][i], "hotels de ", i+1, "estrelles")
-                elif opcio == "8":
-                    densitats = densitat_per_districte(llista_hotels, diccionari_barris, diccionari_districtes)
-                    for districte, diccionari_districtes in diccionari_districtes.items():
-                        print("Districte", districte.numero+":"+densitats[districte.nom],"hotels/km2")
-                    dic_estrelles_x_districte = estrelles_per_districte(llista_hotels, diccionari_barris, diccionari_districtes)
-                    for districte, diccionari_districtesrris in diccionari_districtes.items:   
-                        for i in range (5):
-                            print(diccionari_districtes.nom, dic_estrelles_x_districte[diccionari_districtes.nom][i], "hotels de ", i+1, "estrelles")
-                elif opcio == "9":
-                    afegir_prefixe_int (llista_hotels)
-                elif opcio == "s" or opcio == "S":
-                    print("Sortint del programa")
-                else: 
-                    print("Opció no permesa")
-        finally:
-            raise ("© Aiman El Yahyaoui Lazaar & Roger Campos Guilera")
+separador = ';'
+
+try:
+    fitxer_hotels = 'hotels.csv'
+    fitxer_barris = 'barris.csv'
+    fitxer_districtes = 'districtes.csv'
+
+    llista_hotels = importar_hotels(fitxer_hotels, separador)
+    diccionari_barris = importar_barris(fitxer_barris, separador)
+    diccionari_districtes = importar_districtes(fitxer_districtes, separador)
+
+except FileNotFoundError as e:
+    print(f'Error llegint fitxers: {e}')
+
+except Exception as e:
+   print(f'Error processant els fitxers: {e}')
+
+else:
+    omplir_llista_barris(diccionari_districtes, diccionari_barris)
+    while True:
+        mostrar_menu()
+        op = input("Introdueix la operació a realitzar: ")
+        if (op == "1"):
+            mostrar_hotels(llista_hotels)
+        elif (op == "2"):
+            llista_ordenada_estrelles = ordenar_per_estrelles(llista_hotels)
+            mostrar_hotels(llista_ordenada_estrelles)
+        elif (op == "3"):
+            buscar_hotels(llista_hotels)
+        elif (op == "4"):
+            try:
+                latitud = float(input("Introdueix el valor de latitud del punt des d'on vol buscar un hotel proper: "))
+                longitud = float(
+                    input("Introdueix el valor de longitud del punt des d'on vol buscar un hotel proper: "))
+                hotel_proper, distancia_hotel = hotel_mes_proper(llista_hotels, latitud, longitud)
+                print(f"L'hotel més proper és el {hotel_proper} a {distancia_hotel} kms")
+            except ValueError:
+                print("Error: latitud i longitud han de ser valors reals")
+        elif (op == "5"):
+            llista_hotels_ordenats = ordenar_per_nom(llista_hotels)
+            mostrar_hotels(llista_hotels_ordenats)
+        elif (op == "6"):
+            llista_carrers = carrers_amb_hotels(llista_hotels)
+            print("Hi ha " + str(len(llista_carrers)) + " carrers amb algun hotel: " + str(llista_carrers))
+        elif (op == "7"):
+            estrelles_barris = estrelles_per_barri(llista_hotels, diccionari_barris)
+            for nom_barri, llista_estrelles_barri in estrelles_barris.items():
+                print("El barri " + str(nom_barri) + " té " + str(
+                    llista_estrelles_barri[0]) + " hotels de 1 estrella, " + str(
+                    llista_estrelles_barri[1]) + " hotels de 2 estrelles, " + str(
+                    llista_estrelles_barri[2]) + " hotels de 3 estrelles, " + str(
+                    llista_estrelles_barri[3]) + " hotels de 4 estrelles, " + str(
+                    llista_estrelles_barri[4]) + " hotels de 5 estrelles\n")
+        elif (op == "8"):
+            diccionari_densitats = densitat_per_districte(llista_hotels, diccionari_barris, diccionari_districtes)
+            for codi_districte, densitat in diccionari_densitats.items():
+                print("Districte " + str(codi_districte) + ": " + str(densitat) + " hotels/km2\n")
+        elif (op == "9"):
+            modificar_telefons(llista_hotels)
+        elif op == 'S' or op == 's':
+            print('Sortint del programa')
+            break
+
+        else:
+            print('Opció no permesa')
+
+finally:
+    print ("© Aiman El Yahyaoui Lazaar & Roger Campos Guilera")
