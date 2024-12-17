@@ -1,4 +1,4 @@
-import math
+eimport math
 import csv
 
 class Hotel:
@@ -249,11 +249,13 @@ def buscar_hotels(llista_hotels):
         while True:
             try:
                 estrelles = int(input("Introdueix el número d'estrelles a buscar: "))
-                if not isinstance(estrelles, int)                
-                    print("Error: el número d'estrelles ha de ser un valor enter.")
+                if estrelles < 1 or estrelles > 5:
+                    print("Error: el número d'estrelles ha de ser un valor entre 1 i 5.")
+                else:
+                    break
             except ValueError:
-                print("Error: el número d'estrelles ha de ser un valor entre 1 i 5.")
-        
+                print("Error: el número d'estrelles ha de ser un valor enter.")
+
         hotels_trobats = buscar_per_estrelles(llista_hotels, estrelles)
 
         if hotels_trobats:
