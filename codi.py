@@ -120,7 +120,7 @@ class Barri ():
 def importar_barris(fitxer, separador):
     barris = {}
     try:
-        with open(fitxer, "r") as csv_file:
+        with open(fitxer, "r", encoding = 'utf-8') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=separador)
             next(csv_reader)
             for linia_separada in csv_reader:
