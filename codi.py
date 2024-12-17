@@ -387,7 +387,7 @@ def main ():
         else: 
             omplir_llista_barris(diccionari_districtes, diccionari_barris)
             
-            while opcio != "S" or opcio!= "s":
+            while opcio.upper() != "S":
                 mostrar_menu()
                 opcio = input("Introdueix una opcio: ")
                 if opcio == '1':
