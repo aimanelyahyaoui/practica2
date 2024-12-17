@@ -303,8 +303,8 @@ def carrers_amb_hotels(llista_hotels):
     
 def estrelles_per_barri (llista_hotels, diccionari_barris):
     dic = {}
-    for codi_barri, diccionari_barris in diccionari_barris.items:
-        dic [diccionari_barris.nom] = [0]*5
+    for codi_barri, diccionari_barris in diccionari_barris.items():
+        dic[diccionari_barris.nom] = [0] * 5
         
     for hotel in llista_hotels:
         barri = diccionari_barris[hotel.barri]
@@ -425,7 +425,7 @@ def main ():
                         for i in range (5):
                             print(diccionari_districtes.nom, dic_estrelles_x_districte[diccionari_districtes.nom][i], "hotels de ", i+1, "estrelles")
                 elif opcio == "9":
-                    modificar_telefons (llista_hotels)
+                    afegir_prefixe_int (llista_hotels)
                 elif opcio == "s" or opcio == "S":
                     print("Sortint del programa")
                 else: 
