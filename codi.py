@@ -289,7 +289,7 @@ def hotel_mes_proper (llista_hotels, latitud, longitud):
 #Ex 1:
     
 def ordenar_per_nom (llista_hotels):
-    return sorted(llista_hotels, key=lambda hotel: hotel.nom)   
+    return sorted(llista_hotels, key=lambda hotel: hotel.nom.lower())   
 
 #Ex 2:
 def carrers_amb_hotels(llista_hotels):
@@ -301,16 +301,17 @@ def carrers_amb_hotels(llista_hotels):
 
 #Ex 3:
     
-def estrelles_per_barri (llista_hotels, diccionari_barris):
+def estrelles_per_barri(llista_hotels, diccionari_barris):
     dic = {}
-    for codi_barri, diccionari_barris in diccionari_barris.items():
-        dic[diccionari_barris.nom] = [0] * 5
-        
+    for codi_barri, barri in diccionari_barris.items():
+        dic[barri.nom] = [0] * 5
+
     for hotel in llista_hotels:
-        barri = diccionari_barris[hotel.barri]
-        estrelles = hotel.estrelles
-        dic [barri] [estrelles -1] += 1
-    
+        if hotel.codi_barri in diccionari_barris:
+            barri = diccionari_barris[hotel.codi_barri].nom
+            estrelles = hotel.estrelles
+            dic[barri][estrelles - 1] += 1
+
     return dic
 
 #Ex 4:
