@@ -120,7 +120,7 @@ class Barri ():
 def importar_barris(fitxer, separador):
     barris = {}
     try:
-        with open(fitxer, "r", encoding = 'utf-8') as csv_file:
+        with open(fitxer, "r") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=separador)
             next(csv_reader)
             for linia_separada in csv_reader:
@@ -379,7 +379,7 @@ def mostrar_menu ():
     print("2 - Veure hotels per estrelles")
     print("3 - Buscar hotels")
     print("4 - Buscar hotel proper")
-    print("\n5 - Llistat alfabètic d'hotels \n6 - Carrers amb hotels \n7 - Estadística de barris \n8 - Estadística per districtes \n9 - Internacionalitzar telèfons\nS - Sortir del programa")
+    print("5 - Llistat alfabètic d'hotels \n6 - Carrers amb hotels \n7 - Estadística de barris \n8 - Estadística per districtes \n9 - Internacionalitzar telèfons\nS - Sortir del programa")
     
 separador = ';'
 
